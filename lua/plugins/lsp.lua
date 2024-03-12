@@ -15,29 +15,36 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>la', function()
-    vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
-  end, '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>lD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-  nmap('<leader>lds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>lws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-  -- See `:help K` for why this keymap
 
   if COLEMAK_MODE then
-    nmap('E', vim.lsp.buf.hover, 'Hover Documentation')
+    nmap('<leader>ir', vim.lsp.buf.rename, '[R]e[n]ame')
+    nmap('<leader>ia', function()
+      vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
+    end, '[C]ode [A]ction')
+
+    nmap('<leader>iD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+    nmap('<leader>is', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+    nmap('<leader>iws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
   else
-    nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+    nmap('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
+    nmap('<leader>la', function()
+      vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
+    end, '[C]ode [A]ction')
+
+    nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+    nmap('<leader>lds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+    nmap('<leader>lws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
     nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
   end
 
-  -- nmap('<C-e>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')

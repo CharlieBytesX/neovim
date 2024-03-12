@@ -2,8 +2,8 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   --
   --
-
   -- Git related plugins
+
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
   { "rose-pine/neovim",      name = "rose-pine" },
@@ -47,10 +47,6 @@ require('lazy').setup({
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
-  },
-  {
-    "aserowy/tmux.nvim",
-    config = function() return require("tmux").setup() end
   },
 
   {
