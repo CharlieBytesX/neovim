@@ -21,27 +21,16 @@ local on_attach = function(_, bufnr)
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
 
-  if COLEMAK_MODE then
-    nmap('<leader>ir', vim.lsp.buf.rename, '[R]e[n]ame')
-    nmap('<leader>ia', function()
-      vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
-    end, '[C]ode [A]ction')
+  nmap('K', vim.lsp.buf.hover, 'hover')
+  nmap('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('<leader>la', function()
+    vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
+  end, '[C]ode [A]ction')
 
-    nmap('<leader>iD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-    nmap('<leader>is', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-    nmap('<leader>iws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-    nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-  else
-    nmap('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
-    nmap('<leader>la', function()
-      vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
-    end, '[C]ode [A]ction')
-
-    nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-    nmap('<leader>lds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-    nmap('<leader>lws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-    nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-  end
+  nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+  nmap('<leader>lds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>lws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('<leader>lK', vim.lsp.buf.signature_help, 'Signature Documentation')
 
 
 

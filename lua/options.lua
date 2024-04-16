@@ -4,9 +4,15 @@ vim.o.hlsearch = false
 -- Make line numbers default
 -- vim.wo.number = true
 vim.wo.relativenumber = true
+vim.wo.number = true
+
+vim.opt.scrolloff = 10
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
+
+vim.opt.splitright = true
+
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -35,3 +41,13 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+
+-- Toggle between autoformat
+vim.cmd([[
+  augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+  augroup END
+]])
