@@ -12,12 +12,15 @@ vim.opt.scrolloff = 10
 vim.o.mouse = 'a'
 
 vim.opt.splitright = true
-
+vim.opt.tabstop = 2
+-- Set the number of spaces to use for each level of indentation
+vim.opt.shiftwidth = 2
+-- vim.opt.expandtab = true
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+-- vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -42,12 +45,11 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-
 -- Toggle between autoformat
-vim.cmd([[
+vim.cmd [[
   augroup numbertoggle
     autocmd!
     autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
     autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
   augroup END
-]])
+]]

@@ -1,12 +1,4 @@
--- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -15,11 +7,9 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-
 
   nmap('K', vim.lsp.buf.hover, 'hover')
   nmap('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -32,20 +22,22 @@ local on_attach = function(_, bufnr)
   nmap('<leader>lws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
   nmap('<leader>lK', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-
-
-
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
   -- Create a command `:Format` local to the LSP buffer
+end
+
+local add_formatting = function(client, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.notify('Formatting with ' .. client.name)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
+
 require('mason').setup()
 require('mason-lspconfig').setup()
 
@@ -60,10 +52,21 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  pyright = {
+
+    settings = {
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          diagnosticMode = 'openFilesOnly',
+        },
+      },
+    },
+  },
 
   lua_ls = {
     Lua = {
@@ -74,7 +77,6 @@ local servers = {
     },
   },
 }
-
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -91,50 +93,53 @@ mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
-      on_attach = on_attach,
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+        if client.name ~= 'tsserver' and client.name ~= 'tailwindcss' then
+          add_formatting(client, bufnr)
+        end
+      end,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
     }
   end,
 }
 
-
 function ToggleLspVirtualText(display_mode)
-  if vim.bo.filetype == "" then
-    print("No active LSP client for current buffer")
+  if vim.bo.filetype == '' then
+    print 'No active LSP client for current buffer'
     return
   end
 
-  if display_mode == "underline" then
-    vim.diagnostic.config({ virtual_text = false, underline = true, signs = false })
-  elseif display_mode == "all" then
-    vim.diagnostic.config({ virtual_text = true, underline = true, signs = true })
-  elseif display_mode == "icons" then
-    vim.diagnostic.config({ virtual_text = false, underline = false, signs = true })
-  elseif display_mode == "underline&icons" then
-    vim.diagnostic.config({ virtual_text = false, underline = true, signs = true })
+  if display_mode == 'underline' then
+    vim.diagnostic.config { virtual_text = false, underline = true, signs = false }
+  elseif display_mode == 'all' then
+    vim.diagnostic.config { virtual_text = true, underline = true, signs = true }
+  elseif display_mode == 'icons' then
+    vim.diagnostic.config { virtual_text = false, underline = false, signs = true }
+  elseif display_mode == 'underline&icons' then
+    vim.diagnostic.config { virtual_text = false, underline = true, signs = true }
   else
-    print("Invalid display mode. Available options: underline, all, icons")
+    print 'Invalid display mode. Available options: underline, all, icons'
     return
   end
-  print("LSP virtual text display mode set to " .. display_mode)
+  print('LSP virtual text display mode set to ' .. display_mode)
 end
 
-vim.api.nvim_create_user_command("VTAll", function()
-  ToggleLspVirtualText("all")
+vim.api.nvim_create_user_command('VTAll', function()
+  ToggleLspVirtualText 'all'
 end, {})
 
-vim.api.nvim_create_user_command("VTUnderline", function()
-  ToggleLspVirtualText("underline")
+vim.api.nvim_create_user_command('VTUnderline', function()
+  ToggleLspVirtualText 'underline'
 end, {})
 
-vim.api.nvim_create_user_command("VTIcons", function()
-  ToggleLspVirtualText("icons")
+vim.api.nvim_create_user_command('VTIcons', function()
+  ToggleLspVirtualText 'icons'
 end, {})
 
-vim.api.nvim_create_user_command("VTUnderlineIcons", function()
-  ToggleLspVirtualText("underline&icons")
+vim.api.nvim_create_user_command('VTUnderlineIcons', function()
+  ToggleLspVirtualText 'underline&icons'
 end, {})
 
-
-vim.diagnostic.config({ virtual_text = false, underline = false, signs = true })
+vim.diagnostic.config { virtual_text = false, underline = false, signs = true }

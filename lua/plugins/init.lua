@@ -6,9 +6,35 @@ require('lazy').setup({
 
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
-    { "rose-pine/neovim",      name = "rose-pine" },
+    {
+        'folke/noice.nvim',
+        event = 'VeryLazy',
+        opts = {
+            -- add any options here
+        },
+        dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+            'MunifTanjim/nui.nvim',
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
+            -- 'rcarriga/nvim-notify',
+        },
+    },
+
+    {
+        'stevearc/dressing.nvim',
+        opts = {},
+    },
+    { 'rose-pine/neovim',      name = 'rose-pine' },
 
     'tpope/vim-sleuth',
+    {
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function()
+            require 'plugins.nulls'
+        end,
+    },
 
     -- Lua
     {
@@ -17,30 +43,31 @@ require('lazy').setup({
             'lewis6991/gitsigns.nvim',
             'nvim-tree/nvim-web-devicons',
         },
-        init = function() vim.g.barbar_auto_setup = false end,
+        init = function()
+            vim.g.barbar_auto_setup = false
+        end,
         opts = {},
         version = '^1.0.0', -- optional: only update when a new 1.x version is released
     },
 
-
     {
-        "folke/zen-mode.nvim",
-        opts = {}
+        'folke/zen-mode.nvim',
+        opts = {},
     },
     {
-        "rest-nvim/rest.nvim",
-        dependencies = { { "nvim-lua/plenary.nvim" } },
+        'rest-nvim/rest.nvim',
+        dependencies = { { 'nvim-lua/plenary.nvim' } },
         config = function()
-            require("rest-nvim").setup({})
-        end
+            require('rest-nvim').setup {}
+        end,
     },
     {
-        "ThePrimeagen/harpoon",
-        branch = "harpoon2",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        'ThePrimeagen/harpoon',
+        branch = 'harpoon2',
+        dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
-            require('plugins.harpoon')
-        end
+            require 'plugins.harpoon'
+        end,
     },
     {
         -- LSP Configuration & Plugins
@@ -64,14 +91,14 @@ require('lazy').setup({
         branch = 'v2', -- optional but strongly recommended
         config = function()
             -- you can configure Hop the way you like here; see :h hop-config
-            require 'hop'.setup {}
-        end
+            require('hop').setup {}
+        end,
     },
     {
         -- Autocompletion
         'hrsh7th/nvim-cmp',
         config = function()
-            require("plugins.cmp")
+            require 'plugins.cmp'
         end,
         dependencies = {
             -- Snippet Engine & its associated nvim-cmp source
@@ -103,8 +130,8 @@ require('lazy').setup({
         'folke/which-key.nvim',
         opts = {},
         config = function()
-            require("plugins.whichkey")
-        end
+            require 'plugins.whichkey'
+        end,
     },
     {
         -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -181,14 +208,13 @@ require('lazy').setup({
         },
     },
 
-
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
+        'catppuccin/nvim',
+        name = 'catppuccin',
         priority = 1000,
         config = function()
-            require("plugins.catppuccin")
-        end
+            require 'plugins.catppuccin'
+        end,
     },
 
     {
@@ -222,7 +248,7 @@ require('lazy').setup({
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
         config = function()
-            require("plugins.telescope")
+            require 'plugins.telescope'
         end,
         dependencies = {
             'nvim-lua/plenary.nvim',
@@ -245,7 +271,7 @@ require('lazy').setup({
         -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
         config = function()
-            require("plugins.treesitter")
+            require 'plugins.treesitter'
         end,
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
@@ -254,16 +280,16 @@ require('lazy').setup({
     },
 
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
+        'nvim-neo-tree/neo-tree.nvim',
+        branch = 'v3.x',
         config = function()
-            require("plugins.neotree")
+            require 'plugins.neotree'
         end,
 
         dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
+            'nvim-lua/plenary.nvim',
+            'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+            'MunifTanjim/nui.nvim',
             -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
         },
     },
@@ -271,16 +297,16 @@ require('lazy').setup({
         'stevearc/oil.nvim',
         opts = {},
         -- Optional dependencies
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
-            require("plugins.oil")
-        end
+            require 'plugins.oil'
+        end,
     },
     {
         'goolord/alpha-nvim',
         config = function()
-            require "plugins.alpha"
-        end
+            require 'plugins.alpha'
+        end,
     },
 
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
