@@ -55,18 +55,7 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-  pyright = {
-
-    settings = {
-      python = {
-        analysis = {
-          autoSearchPaths = true,
-          useLibraryCodeForTypes = true,
-          diagnosticMode = 'openFilesOnly',
-        },
-      },
-    },
-  },
+  --
 
   lua_ls = {
     Lua = {
@@ -142,4 +131,4 @@ vim.api.nvim_create_user_command('VTUnderlineIcons', function()
   ToggleLspVirtualText 'underline&icons'
 end, {})
 
-vim.diagnostic.config { virtual_text = false, underline = false, signs = true }
+-- vim.diagnostic.config { virtual_text = false, underline = false, signs = true }

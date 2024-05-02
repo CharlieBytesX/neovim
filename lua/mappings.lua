@@ -6,7 +6,7 @@
 -- Remap for dealing with word wraasta
 --
 
-vim.keymap.set('n', '<leader>q', ':q<cr>', { desc = 'Quit' })
+vim.keymap.set('n', '<leader>Q', ':q<cr>', { desc = 'Quit' })
 
 vim.keymap.set('n', 'n', 'nzz', { silent = true, noremap = true })
 vim.keymap.set('n', 'N', 'Nzz', { silent = true, noremap = true })
@@ -15,6 +15,15 @@ vim.keymap.set('n', '<leader>v', ':vsplit<cr>', { silent = true, noremap = true,
 
 -- Custom
 vim.keymap.set({ 'n' }, '<leader>p', ':b#<cr>', { silent = true, noremap = true }) -- go to previous buffer
+
+-- Quick fix advance
+vim.keymap.set('n', '<Leader>n', ':cnext<CR>', { noremap = true, silent = true })
+
+-- Quick fix previous
+vim.keymap.set('n', '<Leader>p', ':cprev<CR>', { noremap = true, silent = true })
+
+-- TODO
+vim.keymap.set('n', '<Leader>q', ':TodoQuickFix<CR>', { noremap = true, silent = true, desc = 'Show todo quick fix' })
 
 -- HOP
 vim.keymap.set('n', 's', ':HopChar2<cr>', { silent = true, noremap = true })
@@ -47,9 +56,9 @@ vim.keymap.set('n', 'L', '<Cmd>BufferNext<CR>', {})
 
 if HARPOON_IS_ACTIVE then
     local harpoon = require 'harpoon'
-    vim.keymap.set('n', '<C-p>', function()
+    vim.keymap.set('n', '<leader>ha', function()
         harpoon:list():append()
-    end)
+    end, { desc = 'Add to harpoon' })
     vim.keymap.set('n', '<leader>j', function()
         harpoon.ui:toggle_quick_menu(harpoon:list())
     end)

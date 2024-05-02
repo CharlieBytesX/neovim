@@ -6,19 +6,20 @@ require('lazy').setup({
 
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
+    'marko-cerovac/material.nvim',
     {
         'folke/noice.nvim',
         event = 'VeryLazy',
         opts = {
-            -- add any options here
+            notify = {
+                enabled = false,
+            },
+            messages = {
+                enabled = false,
+            },
         },
         dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
             'MunifTanjim/nui.nvim',
-            -- OPTIONAL:
-            --   `nvim-notify` is only needed, if you want to use the notification view.
-            --   If not available, we use `mini` as the fallback
-            -- 'rcarriga/nvim-notify',
         },
     },
 
@@ -55,13 +56,6 @@ require('lazy').setup({
         opts = {},
     },
     {
-        'rest-nvim/rest.nvim',
-        dependencies = { { 'nvim-lua/plenary.nvim' } },
-        config = function()
-            require('rest-nvim').setup {}
-        end,
-    },
-    {
         'ThePrimeagen/harpoon',
         branch = 'harpoon2',
         dependencies = { 'nvim-lua/plenary.nvim' },
@@ -79,7 +73,7 @@ require('lazy').setup({
 
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim',       opts = {} },
+            -- { 'j-hui/fidget.nvim',       opts = {} },
 
             -- Additional lua configuration, makes nvim stuff amazing!
             'folke/neodev.nvim',
@@ -97,9 +91,6 @@ require('lazy').setup({
     {
         -- Autocompletion
         'hrsh7th/nvim-cmp',
-        config = function()
-            require 'plugins.cmp'
-        end,
         dependencies = {
             -- Snippet Engine & its associated nvim-cmp source
             {
@@ -145,6 +136,7 @@ require('lazy').setup({
                 topdelete = { text = '‾' },
                 changedelete = { text = '~' },
             },
+            signcolumn = false,
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
 
@@ -307,6 +299,15 @@ require('lazy').setup({
         config = function()
             require 'plugins.alpha'
         end,
+    },
+    {
+        'folke/todo-comments.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
     },
 
     -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart

@@ -15,6 +15,7 @@ vim.opt.splitright = true
 vim.opt.tabstop = 2
 -- Set the number of spaces to use for each level of indentation
 vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
 -- vim.opt.expandtab = true
 
 -- Sync clipboard between OS and Neovim.

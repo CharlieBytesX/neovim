@@ -12,6 +12,7 @@ return {
   -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
+    'nvim-neotest/nvim-nio',
     'rcarriga/nvim-dap-ui',
 
     -- Installs the debug adapters for you
@@ -26,6 +27,7 @@ return {
     local dapui = require 'dapui'
 
     require('mason-nvim-dap').setup {
+      automatic_installation = true,
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
       automatic_setup = true,

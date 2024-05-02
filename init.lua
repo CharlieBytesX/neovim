@@ -15,15 +15,19 @@ require 'autocmd'
 
 -- fire outside config
 require('neodev').setup()
+require 'plugins.cmp'
 require 'plugins.lsp'
 
+vim.g.material_style = 'deep ocean'
+
 local colorschemes = {
+  Material = 'material',
   Mocha = 'catppuccin-mocha',
   RosepineMoon = 'rose-pine-moon',
   RosepineMain = 'rose-pine-main',
 }
 
-local colorscheme = colorschemes.RosepineMoon
+local colorscheme = colorschemes.Mocha
 
 vim.cmd('colorscheme ' .. colorscheme)
 
