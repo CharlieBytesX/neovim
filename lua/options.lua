@@ -7,9 +7,11 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 
 vim.opt.scrolloff = 10
+vim.o.cmdheight = 0
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
+vim.o.wrap = false
 
 vim.opt.splitright = true
 vim.opt.tabstop = 2
@@ -43,7 +45,6 @@ vim.o.timeoutlen = 300
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
 -- Toggle between autoformat

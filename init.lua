@@ -23,11 +23,13 @@ vim.g.material_style = 'deep ocean'
 local colorschemes = {
   Material = 'material',
   Mocha = 'catppuccin-mocha',
+  Macchiato = 'catppuccin-macchiato',
   RosepineMoon = 'rose-pine-moon',
   RosepineMain = 'rose-pine-main',
+  Gruvbox = 'gruvbox',
+  OneDarkPro = 'onedark',
 }
-
-local colorscheme = colorschemes.Mocha
+local colorscheme = colorschemes.Macchiato
 
 vim.cmd('colorscheme ' .. colorscheme)
 

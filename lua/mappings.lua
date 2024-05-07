@@ -6,8 +6,6 @@
 -- Remap for dealing with word wraasta
 --
 
-vim.keymap.set('n', '<leader>Q', ':q<cr>', { desc = 'Quit' })
-
 vim.keymap.set('n', 'n', 'nzz', { silent = true, noremap = true })
 vim.keymap.set('n', 'N', 'Nzz', { silent = true, noremap = true })
 
@@ -16,14 +14,13 @@ vim.keymap.set('n', '<leader>v', ':vsplit<cr>', { silent = true, noremap = true,
 -- Custom
 vim.keymap.set({ 'n' }, '<leader>p', ':b#<cr>', { silent = true, noremap = true }) -- go to previous buffer
 
--- Quick fix advance
+-- Quick fix
 vim.keymap.set('n', '<Leader>n', ':cnext<CR>', { noremap = true, silent = true })
-
--- Quick fix previous
 vim.keymap.set('n', '<Leader>p', ':cprev<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>q', ':cclose<CR>', { noremap = true, silent = true })
 
 -- TODO
-vim.keymap.set('n', '<Leader>q', ':TodoQuickFix<CR>', { noremap = true, silent = true, desc = 'Show todo quick fix' })
+vim.keymap.set('n', '<Leader>Q', ':TodoQuickFix<CR>', { noremap = true, silent = true, desc = 'Show todo quick fix' })
 
 -- HOP
 vim.keymap.set('n', 's', ':HopChar2<cr>', { silent = true, noremap = true })

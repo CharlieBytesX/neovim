@@ -1,8 +1,12 @@
 require('lazy').setup({
-    -- NOTE: First, some plugins that don't require any configuration
     --
     --
     -- Git related plugins
+    { 'ellisonleao/gruvbox.nvim', priority = 1000,   config = true },
+    {
+        'olimorris/onedarkpro.nvim',
+        priority = 1000, -- Ensure it loads first
+    },
 
     'tpope/vim-fugitive',
     'tpope/vim-rhubarb',
@@ -27,7 +31,7 @@ require('lazy').setup({
         'stevearc/dressing.nvim',
         opts = {},
     },
-    { 'rose-pine/neovim',      name = 'rose-pine' },
+    { 'rose-pine/neovim',         name = 'rose-pine' },
 
     'tpope/vim-sleuth',
     {
