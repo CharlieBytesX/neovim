@@ -106,9 +106,6 @@ require('lazy').setup({
       {
         'L3MON4D3/LuaSnip',
         build = (function()
-          -- Build Step is needed for regex support in snippets
-          -- This step is not supported in many windows environments
-          -- Remove the below condition to re-enable on windows
           if vim.fn.has 'win32' == 1 then
             return
           end
@@ -120,6 +117,7 @@ require('lazy').setup({
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'onsails/lspkind.nvim',
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
