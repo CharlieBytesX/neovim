@@ -2,7 +2,25 @@ require('lazy').setup({
   --
   --
   -- Git related plugins
-  { 'ellisonleao/gruvbox.nvim', priority = 1000,   config = true },
+  { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
+  { "tpope/vim-dotenv" },
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+      { 'tpope/vim-dadbod',                     lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
+  },
   {
     'olimorris/onedarkpro.nvim',
     priority = 1000, -- Ensure it loads first
@@ -37,7 +55,7 @@ require('lazy').setup({
     'stevearc/dressing.nvim',
     opts = {},
   },
-  { 'rose-pine/neovim',         name = 'rose-pine' },
+  { 'rose-pine/neovim', name = 'rose-pine' },
 
   'tpope/vim-sleuth',
   {
