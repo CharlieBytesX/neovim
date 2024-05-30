@@ -22,10 +22,7 @@ end
 
 dashboard.section.header.opts.hl = 'Number'
 
-local handle = io.popen 'fortune'
-local fortune = handle:read '*a'
-handle:close()
-dashboard.section.footer.val = fortune
+-- dashboard.section.footer.val = fortune
 
 dashboard.config.opts.noautocmd = true
 
