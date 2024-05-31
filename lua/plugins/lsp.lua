@@ -54,9 +54,9 @@ local servers = {
   -- gopls = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  html = { filetypes = { 'html', 'twig', 'hbs', 'templ' } },
-  htmx = { filetypes = { 'html', 'templ' } },
-  emmet_language_server = { filetypes = { 'html', 'templ', 'typescriptreact', 'javascriptreact' } },
+  html = { filetypes = { 'html', 'twig', 'hbs', 'templ', "htmldjango" } },
+  htmx = { filetypes = { 'html', 'templ', "htmldjango" } },
+  emmet_language_server = { filetypes = { 'html', 'templ', 'typescriptreact', 'javascriptreact', 'htmldjango' } },
   --
 
   lua_ls = {
