@@ -5,6 +5,13 @@ require('lazy').setup({
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
   { "tpope/vim-dotenv" },
   {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("plugins.autotag")
+    end
+  },
+
+  {
     'kristijanhusak/vim-dadbod-ui',
     dependencies = {
       { 'tpope/vim-dadbod',                     lazy = true },
