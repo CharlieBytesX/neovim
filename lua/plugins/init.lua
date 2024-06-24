@@ -4,10 +4,20 @@ require('lazy').setup({
   -- Git related plugins
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
   { "tpope/vim-dotenv" },
+  -- {
+  --   "windwp/nvim-ts-autotag",
+  --   config = function()
+  --     require("plugins.autotag")
+  --   end
+  -- },
   {
-    "windwp/nvim-ts-autotag",
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
     config = function()
-      require("plugins.autotag")
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
     end
   },
 
@@ -74,19 +84,6 @@ require('lazy').setup({
 
   -- Lua
   {
-    'romgrk/barbar.nvim',
-    dependencies = {
-      'lewis6991/gitsigns.nvim',
-      'nvim-tree/nvim-web-devicons',
-    },
-    init = function()
-      vim.g.barbar_auto_setup = false
-    end,
-    opts = {},
-    version = '^1.0.0', -- optional: only update when a new 1.x version is released
-  },
-
-  {
     'folke/zen-mode.nvim',
     opts = {},
   },
@@ -142,6 +139,7 @@ require('lazy').setup({
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
       'onsails/lspkind.nvim',
 
       -- Adds a number of user-friendly snippets

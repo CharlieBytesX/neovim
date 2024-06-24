@@ -44,10 +44,6 @@ vim.keymap.set('n', '<leader>lk', vim.diagnostic.goto_prev, { desc = 'Go to prev
 vim.keymap.set('n', '<leader>lj', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>lf', ':Format<cr>', { desc = 'Format' })
 
--- Barbar (for tabs)
-vim.keymap.set('n', 'H', '<cmd>BufferPrevious<cr>', {})
-vim.keymap.set('n', 'L', '<Cmd>BufferNext<CR>', {})
-
 -- python ENVS
 -- vim.keymap.set('n', '<leader>lj', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 
