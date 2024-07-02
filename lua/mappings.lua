@@ -11,8 +11,9 @@ vim.keymap.set('n', 'N', 'Nzz', { silent = true, noremap = true })
 
 vim.keymap.set('n', '<leader>v', ':vsplit<cr>', { silent = true, noremap = true, desc = 'split' })
 
+
 -- Custom
-vim.keymap.set({ 'n' }, '<leader>p', ':b#<cr>', { silent = true, noremap = true }) -- go to previous buffer
+vim.keymap.set({ 'n' }, 'L', ':b#<cr>', { silent = true, noremap = true }) -- go to previous buffer
 
 -- Quick fix
 vim.keymap.set('n', '<Leader>n', ':cnext<CR>', { noremap = true, silent = true })

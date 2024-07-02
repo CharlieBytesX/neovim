@@ -7,7 +7,7 @@ vim.wo.relativenumber = true
 vim.wo.number = true
 
 vim.opt.scrolloff = 10
-vim.o.cmdheight = 0
+-- vim.o.cmdheight = 0
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
