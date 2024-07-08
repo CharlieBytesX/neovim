@@ -3,7 +3,9 @@ require('lazy').setup({
   --
   -- Git related plugins
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
-  { "tpope/vim-dotenv" },
+  { 'yioneko/nvim-vtsls' },
+
+  { 'tpope/vim-dotenv' },
   -- {
   --   "windwp/nvim-ts-autotag",
   --   config = function()
@@ -11,14 +13,14 @@ require('lazy').setup({
   --   end
   -- },
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    'kylechui/nvim-surround',
+    version = '*', -- Use for stability; omit to use `main` branch for the latest features
+    event = 'VeryLazy',
     config = function()
-      require("nvim-surround").setup({
+      require('nvim-surround').setup {
         -- Configuration here, or leave empty to use defaults
-      })
-    end
+      }
+    end,
   },
 
   {

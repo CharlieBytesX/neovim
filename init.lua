@@ -28,8 +28,9 @@ local colorschemes = {
   RosepineMain = 'rose-pine-main',
   Gruvbox = 'gruvbox',
   OneDarkPro = 'onedark',
+  Default = 'default',
 }
-local colorscheme = colorschemes.Macchiato
+local colorscheme = colorschemes.RosepineMoon
 
 vim.cmd('colorscheme ' .. colorscheme)
 
