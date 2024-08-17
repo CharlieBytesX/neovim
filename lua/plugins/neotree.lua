@@ -69,10 +69,18 @@ require('neo-tree').setup {
   popup_border_style = 'rounded',
   enable_git_status = true,
   enable_diagnostics = true,
-  enable_normal_mode_for_inputs = false,                             -- Enable normal mode for input dialogs.
   open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf' }, -- when opening files, do not use windows containing these filetypes or buftypes
   sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
-  sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
+  event_handlers = {
+    event = "neo_tree_popup_input_ready",
+    ---@param args { bufnr: integer, winid: integer }
+    handler = function(args)
+      vim.cmd("stopinsert")
+      vim.keymap.set("i", "<esc>", vim.cmd.stopinsert, { noremap = true, buffer = args.bufnr })
+    end,
+  },
+
+  sort_function = nil, -- use a custom function for sorting files and directories in the tree
   -- sort_function = function (a,b)
   --       if a.type == b.type then
   --           return a.path > b.path
@@ -223,11 +231,11 @@ require('neo-tree').setup {
   filesystem = {
     filtered_items = {
       visible = false, -- when true, they will just be displayed differently than normal items
-      hide_dotfiles = true,
-      hide_gitignored = true,
-      hide_hidden = true, -- only works on Windows for hidden files/directories
+      hide_dotfiles = false,
+      hide_gitignored = false,
+      hide_hidden = false, -- only works on Windows for hidden files/directories
       hide_by_name = {
-        --"node_modules"
+        "node_modules"
       },
       hide_by_pattern = { -- uses glob style patterns
         --"*.meta",
@@ -237,11 +245,11 @@ require('neo-tree').setup {
         --".gitignored",
       },
       never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
-        --".DS_Store",
+        ".DS_Store",
         --"thumbs.db"
       },
       never_show_by_pattern = { -- uses glob style patterns
-        --".null-ls_*",
+        ".null-ls_*",
       },
     },
     follow_current_file = {

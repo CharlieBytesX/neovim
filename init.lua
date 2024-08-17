@@ -29,8 +29,9 @@ local colorschemes = {
   Gruvbox = 'gruvbox',
   OneDarkPro = 'onedark',
   Default = 'default',
+  Nord = 'nord',
 }
-local colorscheme = colorschemes.RosepineMoon
+local colorscheme = colorschemes.Macchiato
 
 vim.cmd('colorscheme ' .. colorscheme)
 

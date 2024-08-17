@@ -2,16 +2,21 @@ require('lazy').setup({
   --
   --
   -- Git related plugins
+  -- {
+  --   'mrcjkb/rustaceanvim',
+  --   version = '^5', -- Recommended
+  --   lazy = false,   -- This plugin is already lazy
+  -- },
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
   { 'yioneko/nvim-vtsls' },
 
   { 'tpope/vim-dotenv' },
-  -- {
-  --   "windwp/nvim-ts-autotag",
-  --   config = function()
-  --     require("plugins.autotag")
-  --   end
-  -- },
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("plugins.autotag")
+    end
+  },
   {
     'kylechui/nvim-surround',
     version = '*', -- Use for stability; omit to use `main` branch for the latest features
@@ -22,6 +27,7 @@ require('lazy').setup({
       }
     end,
   },
+  { 'shaunsingh/nord.nvim' },
 
   {
     'kristijanhusak/vim-dadbod-ui',
@@ -74,7 +80,7 @@ require('lazy').setup({
     'stevearc/dressing.nvim',
     opts = {},
   },
-  { 'rose-pine/neovim', name = 'rose-pine' },
+  { 'rose-pine/neovim',    name = 'rose-pine' },
 
   'tpope/vim-sleuth',
   {

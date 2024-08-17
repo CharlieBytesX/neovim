@@ -67,7 +67,16 @@ end
 local function search_all_files_except_node_modules()
   require('telescope.builtin').find_files({
     find_command = {
-      'rg', '--files', '--hidden', '--no-ignore', '--glob', '!.git/', '--glob', '!.node_modules/**'
+      'rg', '--files', '--hidden', '--glob', '!.git/', '--glob', '!.node_modules/**', '!target/**'
+    },
+    prompt_title = "< Search All Files Except .node_modules >",
+  })
+end
+
+local function search_files()
+  require('telescope.builtin').find_files({
+    find_command = {
+      'rg', '--files', '--hidden', '--glob', '!.git/', '--glob', '!.node_modules/**'
     },
     prompt_title = "< Search All Files Except .node_modules >",
   })
@@ -100,7 +109,7 @@ vim.keymap.set('n', '<leader>ss', require('telescope.builtin').lsp_document_symb
 vim.keymap.set('n', '<leader>sf', search_methods_and_functions, { desc = '[S]earch [S]ymbols' })
 -- vim.keymap.set('n', '<leader>sf', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>o', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>o', search_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sa', search_all_files_except_node_modules, { desc = '[S]earch .[a]ll Files' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })

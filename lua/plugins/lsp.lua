@@ -52,13 +52,12 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
   -- tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs', 'templ', "htmldjango" } },
   htmx = { filetypes = { 'html', 'templ', "htmldjango" } },
-  emmet_language_server = { filetypes = { 'html', 'templ', 'typescriptreact', 'javascriptreact', 'htmldjango' } },
+  emmet_language_server = { filetypes = { 'html', 'templ', 'typescriptreact', 'javascriptreact', 'htmldjango', 'svelte' } },
   --
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
