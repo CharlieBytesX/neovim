@@ -30,8 +30,9 @@ local colorschemes = {
   OneDarkPro = 'onedark',
   Default = 'default',
   Nord = 'nord',
+  Torte = 'torte',
 }
-local colorscheme = colorschemes.Macchiato
+local colorscheme = colorschemes.Torte
 
 vim.cmd('colorscheme ' .. colorscheme)
 
