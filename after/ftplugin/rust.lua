@@ -75,34 +75,71 @@ function SelectAndRunTest()
 
   -- Add an option to run all tests
   table.insert(tests, 1, "Run all tests")
+  -- Telescope picker for selecting a test
+  pickers.new({}, {
+    prompt_title = "Select Test to Run",
+    finder = finders.new_table({
+      results = tests
+    }),
+    sorter = conf.generic_sorter({}),
+    attach_mappings = function(prompt_bufnr, map)
+      -- Define what happens on selection
+      actions.select_default:replace(function()
+        local choice = action_state.get_selected_entry()
+        actions.close(prompt_bufnr)
 
-  -- Present a selection prompt to the user
-  local options = {}
-  for i, test in ipairs(tests) do
-    table.insert(options, string.format("%d. %s", i, test))
-  end
+        if choice == nil then
+          print("Invalid selection.")
+          return
+        end
 
-  -- Use vim's inputlist to prompt the user to choose a test
-  local choice = vim.fn.inputlist(options)
+        -- Run the selected test or all tests
+        if choice.index == 1 then
+          -- Run all tests in the current file
+          local file_name = GetCurrentFileNameForRust()
+          if file_name then
+            vim.cmd("tabnew | terminal cargo test  " .. file_name)
+          else
+            print("Could not determine file name.")
+          end
+        else
+          -- Run the selected test
+          local selected_test = choice.value
+          vim.cmd("vsplit | terminal cargo test " .. selected_test)
+        end
+      end)
 
-  if choice < 1 or choice > #tests then
-    print("Invalid selection.")
-    return
-  end
-  -- Run the selected test or all tests
-  if choice == 1 then
-    -- Run all tests in the current file
-    local file_name = GetCurrentFileNameForRust()
-    if file_name then
-      vim.cmd("tabnew | terminal cargo test  " .. file_name)
-    else
-      print("Could not determine file name.")
-    end
-  else
-    -- Run the selected test
-    local selected_test = tests[choice]
-    vim.cmd("split | terminal cargo test " .. selected_test)
-  end
+      return true
+    end,
+  }):find()
+
+  -- -- Present a selection prompt to the user
+  -- local options = {}
+  -- for i, test in ipairs(tests) do
+  --   table.insert(options, string.format("%d. %s", i, test))
+  -- end
+  --
+  -- -- Use vim's inputlist to prompt the user to choose a test
+  -- local choice = vim.fn.inputlist(options)
+  --
+  -- if choice < 1 or choice > #tests then
+  --   print("Invalid selection.")
+  --   return
+  -- end
+  -- -- Run the selected test or all tests
+  -- if choice == 1 then
+  --   -- Run all tests in the current file
+  --   local file_name = GetCurrentFileNameForRust()
+  --   if file_name then
+  --     vim.cmd("tabnew | terminal cargo test  " .. file_name)
+  --   else
+  --     print("Could not determine file name.")
+  --   end
+  -- else
+  --   -- Run the selected test
+  --   local selected_test = tests[choice]
+  --   vim.cmd("split | terminal cargo test " .. selected_test)
+  -- end
 end
 
 -- Function to run Rust tests
