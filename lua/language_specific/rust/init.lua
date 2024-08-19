@@ -1,7 +1,6 @@
 require("language_specific.rust.utils_local")
-require("language_specific.rust.dap")
 require("language_specific.rust.test_run")
-require("language_specific.rust.test_debug")
+-- require("language_specific.rust.test_debug")
 
 -- Function to setup key mappings in Neovim
 function SetupRustMappings()

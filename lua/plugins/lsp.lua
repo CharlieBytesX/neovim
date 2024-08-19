@@ -1,4 +1,4 @@
-local on_attach = function(_, bufnr)
+On_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -52,7 +52,7 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  rust_analyzer = {},
+  -- rust_analyzer = {},
   -- tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs', 'templ', "htmldjango" } },
   htmx = { filetypes = { 'html', 'templ', "htmldjango" } },
@@ -81,10 +81,13 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
+    if server_name == 'rust_analyzer' then
+      return
+    end
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
+        On_attach(client, bufnr)
         if client.name ~= 'tsserver' and client.name ~= 'tailwindcss' then
           add_formatting(client, bufnr)
         end

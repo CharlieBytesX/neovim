@@ -1,6 +1,28 @@
 -- Set highlight on search
 vim.o.hlsearch = false
 
+vim.g.rustaceanvim = {
+  -- Plugin configuration
+  tools = {
+  },
+  -- LSP configuration
+  server = {
+    on_attach = function(client, bufnr)
+      On_attach(client, bufnr)
+      -- vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { desc = '[G]oto [D]efinition' })
+      -- you can also put keymaps in here
+    end,
+    default_settings = {
+      -- rust-analyzer language server configuration
+      ['rust-analyzer'] = {
+      },
+    },
+  },
+  -- DAP configuration
+  dap = {
+  },
+}
+
 -- Make line numbers default
 -- vim.wo.number = true
 vim.wo.relativenumber = true

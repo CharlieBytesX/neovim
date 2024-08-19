@@ -32,8 +32,16 @@ local colorschemes = {
   Nord = 'nord',
   Torte = 'torte',
 }
-local colorscheme = colorschemes.Torte
+local colorscheme = colorschemes.Mocha
 
 vim.cmd('colorscheme ' .. colorscheme)
 
 require 'mappings'
+require 'custom_config'
+
+
+local project_config = vim.fn.expand('%:p:h') .. '/nvim-dap-config.lua'
+if vim.fn.filereadable(project_config) == 1 then
+  dofile(project_config)
+else
+end
