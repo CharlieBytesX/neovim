@@ -4,6 +4,15 @@ require('lazy').setup({
   --
   -- Git related plugins
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
+  { 'sainnhe/everforest' },
+  {
+    "loctvl842/monokai-pro.nvim",
+    config = function()
+      require("monokai-pro").setup()
+    end
+  },
+
+
   {
     'mrcjkb/rustaceanvim',
     version = '^5', -- Recommended

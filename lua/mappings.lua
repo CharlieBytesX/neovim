@@ -3,13 +3,20 @@
 --
 -- See `:help vim.keymap.set()`
 
--- Remap for dealing with word wraasta
---
+-- Remap for dealing with word
 
 vim.keymap.set('n', 'n', 'nzz', { silent = true, noremap = true })
 vim.keymap.set('n', 'N', 'Nzz', { silent = true, noremap = true })
 
 vim.keymap.set('n', '<leader>v', ':vsplit<cr>', { silent = true, noremap = true, desc = 'split' })
+
+-- Map <leader>y to yank to the system clipboard
+vim.api.nvim_set_keymap('n', '<leader>y', '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true })
+
+-- Map <leader>p to paste from the system clipboard
+vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>p', '"+p', { noremap = true, silent = true })
 
 
 -- Custom

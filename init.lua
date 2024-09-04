@@ -31,17 +31,11 @@ local colorschemes = {
   Default = 'default',
   Nord = 'nord',
   Torte = 'torte',
+  Monokai = 'monokai-pro',
 }
-local colorscheme = colorschemes.Mocha
+local colorscheme = colorschemes.Monokai
 
 vim.cmd('colorscheme ' .. colorscheme)
 
 require 'mappings'
 require 'custom_config'
-
-
-local project_config = vim.fn.expand('%:p:h') .. '/nvim-dap-config.lua'
-if vim.fn.filereadable(project_config) == 1 then
-  dofile(project_config)
-else
-end
