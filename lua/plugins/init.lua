@@ -4,6 +4,7 @@ require('lazy').setup({
   --
   -- Git related plugins
   { 'ellisonleao/gruvbox.nvim', priority = 1000, config = true },
+  { 'sainnhe/gruvbox-material' },
   { 'sainnhe/everforest' },
   {
     "loctvl842/monokai-pro.nvim",

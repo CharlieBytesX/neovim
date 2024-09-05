@@ -1,3 +1,30 @@
+local function toggle_inlay_hints()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end
+
+function ToggleLspVirtualText(display_mode)
+  if vim.bo.filetype == '' then
+    print 'No active LSP client for current buffer'
+    return
+  end
+
+  if display_mode == 'underline' then
+    vim.diagnostic.config { virtual_text = false, underline = true, signs = false }
+  elseif display_mode == 'all' then
+    vim.diagnostic.config { virtual_text = true, underline = true, signs = true }
+  elseif display_mode == 'icons' then
+    vim.diagnostic.config { virtual_text = false, underline = false, signs = true }
+  elseif display_mode == 'underline_and_icons' then
+    vim.diagnostic.config { virtual_text = false, underline = true, signs = true }
+  elseif display_mode == 'text_and_icons' then
+    vim.diagnostic.config { virtual_text = true, underline = false, signs = true }
+  else
+    print 'Invalid display mode. Available options: underline, all, icons'
+    return
+  end
+  print('LSP virtual text display mode set to ' .. display_mode)
+end
+
 On_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
     if desc then
@@ -7,14 +34,16 @@ On_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
+  vim.lsp.inlay_hint.enable(true)
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
   nmap('K', vim.lsp.buf.hover, 'hover')
-  nmap('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('<leader>lr', vim.lsp.buf.rename, '[R]e[n]ame and save')
+  nmap('<leader>lt', toggle_inlay_hints, '[T]oggle inlay hints')
   nmap('<leader>la', function()
-    vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
+    vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source', '' } } }
   end, '[C]ode [A]ction')
 
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
@@ -24,6 +53,15 @@ On_attach = function(_, bufnr)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+
+  nmap('<leader>lea', function() ToggleLspVirtualText('all') end, 'Show all diagnostics types')
+  nmap('<leader>leu', function() ToggleLspVirtualText('underline_and_icons') end,
+    'Show underline and icons diagnostics types')
+  nmap('<leader>lei', function() ToggleLspVirtualText('icons') end, 'Show icons diagnostics types')
+  nmap('<leader>lei', function() ToggleLspVirtualText('text_and_icons') end, 'Show icons diagnostics types')
+
+  ToggleLspVirtualText('text_and_icons')
 
   -- Create a command `:Format` local to the LSP buffer
 end
@@ -98,26 +136,6 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
-function ToggleLspVirtualText(display_mode)
-  if vim.bo.filetype == '' then
-    print 'No active LSP client for current buffer'
-    return
-  end
-
-  if display_mode == 'underline' then
-    vim.diagnostic.config { virtual_text = false, underline = true, signs = false }
-  elseif display_mode == 'all' then
-    vim.diagnostic.config { virtual_text = true, underline = true, signs = true }
-  elseif display_mode == 'icons' then
-    vim.diagnostic.config { virtual_text = false, underline = false, signs = true }
-  elseif display_mode == 'underline&icons' then
-    vim.diagnostic.config { virtual_text = false, underline = true, signs = true }
-  else
-    print 'Invalid display mode. Available options: underline, all, icons'
-    return
-  end
-  print('LSP virtual text display mode set to ' .. display_mode)
-end
 
 vim.api.nvim_create_user_command('VTAll', function()
   ToggleLspVirtualText 'all'
