@@ -4,7 +4,7 @@
 require('telescope').setup {
   pickers = {
     buffers = {
-      sort_lastused = true, -- Sort buffers by last accessed time
+      -- sort_lastused = true, -- Sort buffers by last accessed time
       mappings = {
         i = {
           ["<c-d>"] = require('telescope.actions').delete_buffer + require('telescope.actions').move_to_top,

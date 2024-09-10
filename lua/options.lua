@@ -1,6 +1,10 @@
 -- Set highlight on search
 vim.o.hlsearch = false
 
+vim.g.gruvbox_material_background = 'medium'
+
+vim.g.gruvbox_material_foreground = 'mix'
+
 vim.g.rustaceanvim = {
   -- Plugin configuration
   tools = {

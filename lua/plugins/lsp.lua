@@ -22,7 +22,6 @@ function ToggleLspVirtualText(display_mode)
     print 'Invalid display mode. Available options: underline, all, icons'
     return
   end
-  print('LSP virtual text display mode set to ' .. display_mode)
 end
 
 On_attach = function(_, bufnr)
@@ -136,6 +135,17 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+local lspconfig = require "lspconfig"
+lspconfig.svelte.setup {
+  on_attach = function(client)
+    vim.api.nvim_create_autocmd("BufWritePost", {
+      pattern = { "*.js", "*.ts" },
+      callback = function(ctx)
+        client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
+      end,
+    })
+  end
+}
 
 vim.api.nvim_create_user_command('VTAll', function()
   ToggleLspVirtualText 'all'
